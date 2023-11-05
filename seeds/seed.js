@@ -7,12 +7,19 @@ const seedPosts = require('./postData');
 const seedAll = async () => {
     await sequelize.sync({ force: true });
 
-    await seedUsers();
+    const users = await User.bulkCreate(seedUsers, {
+        individualHooks: true,
+        returning: true,
+    });
 
-    await seedPosts();
+    for (const post of seedPosts) {
+        await Post.create({
+            ...post,
+            user_id: users[Math.floor(Math.random() * users.length)].id,
+        });
+    }
 
     process.exit(0);
 }
 
 seedAll();  
-
