@@ -6,4 +6,4 @@ const withAuth = (req,res, next) => {
     }
 };
 
-model.exports = withAuth; 
+module.exports = withAuth; 
