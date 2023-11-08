@@ -120,4 +120,4 @@ router.delete('/:id', withAuth, (req, res) => {
     });
 });
 
-model.exports = router;
+module.exports = router;
